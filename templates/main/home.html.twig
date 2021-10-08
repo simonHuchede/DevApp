@@ -1,0 +1,8 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    {% if not app.user %}
+        <div><img src="{{ asset('img/phpelephant.jpg') }}" alt="logo hello world"></div>
+    {% endif %}
+
+
+{% endblock %}

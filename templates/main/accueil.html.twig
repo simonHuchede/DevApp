@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if not app.user %}
+        <div class="nonAuthentifie">Vous devez être authentifié pour voir la liste des developpeurs </div>
+    {% endif %}
+    {% if app.user %}
+        <div>Filter par langage:
+            {% for langage in frameworks %}
+                <a href="{{ path('filter_byFramework', {'id': langage.id}) }}">{{ langage.name }}</a>
+            {% endfor %}
+        </div>
+        <div>
+
+            {% for developpeur in developpeurs %}
+                {% if app.user.pseudo != developpeur.pseudo%}
+               {{ developpeur.pseudo }}
+
+                {% for framework in developpeur.frameworks %}
+                    <img src="{{ framework.image }}" alt="img">
+                {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% block footer %}
+        <div id="nombreDev">{{ devEnBase|length}} utilisateurs en base de donnee</div>
+        {% endblock %}
+{% endblock %}
+
